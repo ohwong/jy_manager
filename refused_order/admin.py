@@ -39,7 +39,7 @@ class RefusedOrderAdmin(ImportExportModelAdmin):
         return qs.filter(apply_user=request.user)
 
     def get_readonly_fields(self, request, obj=None):
-        if obj is None or (request.user.is_superuser and obj.has_applied):
+        if obj is None or (request.user.is_superuser and obj.has_applied is False):
             # 批准过
             return []
         elif obj.apply_user == request.user and obj.has_applied is False:

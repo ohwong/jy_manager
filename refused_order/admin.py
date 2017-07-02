@@ -59,6 +59,8 @@ class RefusedOrderAdmin(ImportExportModelAdmin):
 
         if not change:
             obj.apply_user = request.user
+        elif request.user.is_superuser and obj.has_applied:
+            obj.deal_user = request.user
         return super(RefusedOrderAdmin, self).save_model(request, obj, form, change)
 
 admin.site.register(RefusedOrder, RefusedOrderAdmin)

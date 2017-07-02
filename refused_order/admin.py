@@ -39,7 +39,7 @@ class RefusedOrderAdmin(ImportExportModelAdmin):
         return qs.filter(apply_user=request.user)
 
     def get_readonly_fields(self, request, obj=None):
-        if obj is None:
+        if obj is None or request.user.is_superuser:
             return []
         elif obj.apply_user == request.user and obj.has_applied is False:
             return []
@@ -52,7 +52,7 @@ class RefusedOrderAdmin(ImportExportModelAdmin):
 
     def make_checked(self, request, queryset):
         if request.user.is_superuser:
-            queryset.update(has_applied=True, apply_user=request.user)
+            queryset.update(has_applied=True, deal_user=request.user)
     make_checked.short_description = "处理申请"
 
     def save_model(self, request, obj, form, change):

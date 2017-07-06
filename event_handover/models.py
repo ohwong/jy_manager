@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 class HandEvent(models.Model):
@@ -30,7 +31,7 @@ class Comment(models.Model):
         verbose_name = verbose_name_plural = "事件交接评论"
 
     hand_event = models.ForeignKey(HandEvent, verbose_name="事件")
-    content = models.TextField(verbose_name="内容")
+    content = RichTextField(verbose_name="内容")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="评论时间")
     user = models.ForeignKey(User, verbose_name="评论者")
 

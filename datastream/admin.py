@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-
 from .models import DataStream
+from .forms import DataStreamForm
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -16,9 +16,16 @@ class DataStreamResource(resources.ModelResource):
 class DataStreamAdmin(ImportExportModelAdmin):
     list_filter = ['the_date', 'aircraft_code', 'flight_type', 'location',
                    'weather', 'temperature', 'fault_time',  'fault_type',
-                   'chapter', 'knob', 'deal_method', 'is_sdr', 'check_user',
-                   'create_user', 'has_checked']
-    list_display = list_filter
+                   'chapter', 'knob', 'deal_method', 'is_sdr', "fault_result",
+                   'has_delayed', 'has_checked']
+
+    search_fields = ['fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
+                      'record_paper_code', 'parts_name', 'strike_parts_code',
+                      'strike_parts_num', 'mount_parts_code', 'fault_result', 'delay_property']
+
+    list_display = ['the_date', 'aircraft_code', 'location', 'chapter', 'knob',
+                    'fault_phase', 'fault_description', 'deal_method', 'has_delayed']
+
     resource_class = DataStreamResource
 
     add_fields = ['the_date', 'aircraft_code', 'flight_type', 'location',
@@ -26,14 +33,18 @@ class DataStreamAdmin(ImportExportModelAdmin):
               'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
               'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
               'strike_parts_num', 'mount_parts_code', 'fault_result', 'delay_property',
-              'delay_reason', 'delay_time', 'is_sdr', 'unexpected_stay_day']  # exclude create_user create_time
+              'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day']
+              # exclude create_user create_time
 
     change_fields = ['the_date', 'aircraft_code', 'flight_type', 'location',
               'weather', 'temperature', 'fault_time', 'fault_phase',
               'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
               'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
               'strike_parts_num', 'mount_parts_code', 'fault_result', 'delay_property',
-              'delay_reason', 'delay_time', 'is_sdr', 'unexpected_stay_day']  # exclude create_user create_time
+              'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day']
+              # exclude create_user create_time
+
+    form = DataStreamForm
 
     def get_readonly_fields(self, request, obj=None):
         if obj is None:

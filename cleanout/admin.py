@@ -11,19 +11,19 @@ class AirCraftCleanOutResource(resources.ModelResource):
 
 
 class AirCraftCleanOutAdmin(ImportExportModelAdmin):
-    list_display = ["aircraft_code", "aircraft_type", "cleanout_date",
+    list_display = ["aircraft_code", "aircraft_type", "cleanout_date", 'cleanout_method',
                     "cleanout_user", "cleanout_department", "cleanout_status",
                     "next_clieanout_date", "note"]
 
     fields = ["aircraft_code", "aircraft_type", "cleanout_date",
-              "cleanout_department", "cleanout_status",
+              "cleanout_department", "cleanout_method", "cleanout_status",
               "next_clieanout_date", "note"]
 
     resource_class = AirCraftCleanOutResource
 
-    search_fields = ["aircraft_code", "aircraft_type", "cleanout_date",
+    search_fields = ["aircraft_code", "aircraft_type",
                      "cleanout_user", "cleanout_department", "cleanout_status",
-                     "next_clieanout_date"]
+                     "cleanout_method"]
     list_filter = search_fields
 
     def save_model(self, request, obj, form, change):

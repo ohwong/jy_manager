@@ -47,8 +47,9 @@ INSTALLED_APPS = (
     'cleanout',
     'datastream',
     'import_export',
-    'refused_order'
-    )
+    'refused_order',
+    'ckeditor',
+)
 
 
 MIDDLEWARE_CLASSES = (
@@ -106,7 +107,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 STATICFILES_DIRS = [
@@ -198,3 +199,16 @@ SUIT_CONFIG = {
     # 'LIST_PER_PAGE': 15
 }
 
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'ColorDialog']
+        ]
+    }
+}

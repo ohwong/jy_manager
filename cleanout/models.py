@@ -11,6 +11,7 @@ class AirCraftCleanOut(models.Model):
     cleanout_date = models.DateField(verbose_name="清洗日期")
     cleanout_user = models.ForeignKey(User, verbose_name="创建者")
     cleanout_department = models.CharField(max_length=32, verbose_name="清洗部门")
+    cleanout_method = models.CharField(max_length=192, verbose_name="清洗方式")
     cleanout_status = models.CharField(max_length=32, verbose_name="清洗效果")
     next_clieanout_date = models.DateField(verbose_name="下次计划时间")
     note = models.TextField(blank=True, null=True, verbose_name="备注")

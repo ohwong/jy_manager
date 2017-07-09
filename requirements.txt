@@ -31,3 +31,5 @@ xlwt==1.2.0
 git+https://github.com/ohwong/django-filer
 django-ckeditor
 toolz
+django-qiniu-storage
+django-suit==0.2.25

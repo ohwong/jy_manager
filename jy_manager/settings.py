@@ -122,40 +122,42 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static")
 
 STATIC_URL = '/static/'
 
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
+
 FILER_STORAGES = {
     'public': {
         'main': {
-            'ENGINE': 'filer.storage.PublicFileSystemStorage',
+            'ENGINE': 'qiniustorage.backends.QiniuStorage',
             'OPTIONS': {
-                'location': MEDIA_ROOT,
-                'base_url': STATIC_URL,
+                # 'location': MEDIA_ROOT,
+                # 'base_url': STATIC_URL,
             },
             'UPLOAD_TO': 'filer.utils.generate_filename.randomized',
             'UPLOAD_TO_PREFIX': 'filer_public',
         },
         'thumbnails': {
-            'ENGINE': 'filer.storage.PublicFileSystemStorage',
+            'ENGINE': 'qiniustorage.backends.QiniuStorage',
             'OPTIONS': {
-                'location': MEDIA_ROOT,
-                'base_url': STATIC_URL,
+                # 'location': MEDIA_ROOT,
+                # 'base_url': STATIC_URL,
             },
         },
     },
     'private': {
         'main': {
-            'ENGINE': 'filer.storage.PrivateFileSystemStorage',
+            'ENGINE': 'qiniustorage.backends.QiniuStorage',
             'OPTIONS': {
-                'location': MEDIA_ROOT,
-                'base_url': STATIC_URL,
+                # 'location': MEDIA_ROOT,
+                # 'base_url': STATIC_URL,
             },
             'UPLOAD_TO': 'filer.utils.generate_filename.randomized',
             'UPLOAD_TO_PREFIX': 'filer_public',
         },
         'thumbnails': {
-            'ENGINE': 'filer.storage.PrivateFileSystemStorage',
+            'ENGINE': 'qiniustorage.backends.QiniuStorage',
             'OPTIONS': {
-                'location': MEDIA_ROOT,
-                'base_url': STATIC_URL,
+                # 'location': MEDIA_ROOT,
+                # 'base_url': STATIC_URL,
             },
         },
     },
@@ -213,3 +215,13 @@ CKEDITOR_CONFIGS = {
     }
 }
 STATIC_ROOT = '/var/www/project/jy_manager/'
+QINIU_ACCESS_KEY = ""
+QINIU_SECRET_KEY = ""
+QINIU_BUCKET_NAME = ""
+QINIU_BUCKET_DOMAIN = ""
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+

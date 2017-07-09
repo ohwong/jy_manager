@@ -41,7 +41,6 @@ class DataStream(models.Model):
     location = models.CharField(max_length=64, verbose_name="地点")
     weather = models.CharField(max_length=64, verbose_name="天气")
     temperature = models.CharField(max_length=64, verbose_name="温度")
-    fault_time = models.CharField(max_length=191, verbose_name="故障时段")
     fault_phase = models.IntegerField(verbose_name="故障阶段", choices=FAULT_PHASE_CHOICES,
                                       default=1)
 
@@ -67,8 +66,6 @@ class DataStream(models.Model):
     mount_date = models.DateTimeField(verbose_name="装机时间", blank=True, null=True)
     fault_result = models.IntegerField(verbose_name="故障后果", choices=FAULT_RESULT_CHOICES,
                                        default=0)
-    delay_property = models.CharField(verbose_name="延误性质", max_length=191,
-                                      blank=True, null=True)
     delay_reason = models.TextField(verbose_name="延误原因", blank=True, null=True)
     delay_time = models.DateTimeField(verbose_name="延误时间", blank=True, null=True)
     has_delayed = models.IntegerField(default=0, choices=YES_OR_NO, verbose_name="是否延误")

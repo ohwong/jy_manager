@@ -212,3 +212,4 @@ CKEDITOR_CONFIGS = {
         ]
     }
 }
+STATIC_ROOT = '/var/www/project/jy_manager/'

@@ -33,3 +33,4 @@ django-ckeditor
 toolz
 django-qiniu-storage
 django-suit==0.2.25
+git+https://github.com/ohwong/django-suit-daterange-filter

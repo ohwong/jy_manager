@@ -6,6 +6,7 @@ from .froms import CommentChangeForm, CommentAddForm
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+from date_range_filter import DateRangeFilter
 
 
 class HandEventResource(resources.ModelResource):
@@ -33,7 +34,8 @@ class HandEventAdmin(ImportExportModelAdmin):
     change_readonly_fields = ["aircraft_code", "aircraft_type", "subject", "chapter_code",
                               "handover_type", "publish_user", "published_time"]
 
-    list_filter = list_display
+    list_filter = ["aircraft_code", "aircraft_type", "subject", "chapter_code",
+                    "handover_type", "publish_user", ('published_time', DateRangeFilter), "status"]
     search_fields = ["aircraft_code", "aircraft_type", "subject", "chapter_code",
                      "handover_type"]
 

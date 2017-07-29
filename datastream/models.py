@@ -32,6 +32,17 @@ class DataStream(models.Model):
         (11, "落地滑跑"),
     )
 
+    TEMPERATURE_CHOICE = (
+        ("28度以上", "28度以上"),
+        ("10-28度", "10-28度"),
+        ("10度以下", "10度以下")
+    )
+
+    STATUS_CHOICES = (
+        (0, "closed"),
+        (1, "open")
+    )
+
     class Meta:
         verbose_name = verbose_name_plural = "数据录入"
 
@@ -40,7 +51,8 @@ class DataStream(models.Model):
     flight_type = models.CharField(max_length=32, verbose_name="航班号")
     location = models.CharField(max_length=64, verbose_name="地点")
     weather = models.CharField(max_length=64, verbose_name="天气")
-    temperature = models.CharField(max_length=64, verbose_name="温度")
+    temperature = models.CharField(max_length=64, verbose_name="温度",
+                                   choices=TEMPERATURE_CHOICE)
     fault_phase = models.IntegerField(verbose_name="故障阶段", choices=FAULT_PHASE_CHOICES,
                                       default=1)
 
@@ -77,6 +89,8 @@ class DataStream(models.Model):
     has_checked = models.BooleanField(verbose_name="完成审核?", default=False)
     check_user = models.ForeignKey(User,related_name="check_user",
                                    verbose_name="审核人员", blank=True, null=True)
+    status = models.IntegerField(choices=STATUS_CHOICES, verbose_name="状态", default=1)
+
 
     def __str__(self):
         return self.fault_type

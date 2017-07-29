@@ -49,6 +49,9 @@ INSTALLED_APPS = (
     'import_export',
     'refused_order',
     'ckeditor',
+    'rangefilter',
+    'date_range_filter',
+    'observation',
 )
 
 
@@ -192,6 +195,7 @@ SUIT_CONFIG = {
         {'label': '事件交接', 'icon': 'icon-retweet', 'models':  ('event_handover.HandEvent', )},
         {'label': '数据录入', 'icon': 'icon-qrcode', 'models':  ('datastream.datastream', )},
         {'label': '飞机清洗', 'icon': 'icon-plane', 'models':  ('cleanout.AirCraftCleanOut', )},
+        {'label': '故障观察件', 'icon': 'icon-leaf', 'models':  ('observation.Observation', )},
         {'label': '文件管理', 'icon': 'icon-file', 'models':  ('filer.folder', )},
 
     ),

@@ -3,6 +3,7 @@ from .models import RefusedOrder
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+from date_range_filter import DateRangeFilter
 
 
 class RefusedOrderResource(resources.ModelResource):
@@ -24,7 +25,10 @@ class RefusedOrderAdmin(ImportExportModelAdmin):
 
     resource_class = RefusedOrderResource
     actions = ['make_checked']
-    list_filter = list_display
+    list_filter = [('created_at', DateRangeFilter), 'aircraft_code',
+                   'terminal', 'worker_code', 'worker_content',
+                   'apply_user', "deal_user",  'note', 'has_applied']
+
     search_fields = list_display
 
     def has_change_permission(self, request, obj=None):

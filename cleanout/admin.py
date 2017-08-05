@@ -25,6 +25,7 @@ class AirCraftCleanOutAdmin(ImportExportModelAdmin):
     search_fields = ["aircraft_code", "aircraft_type",
                      "cleanout_user", "cleanout_department", "cleanout_status",
                      "cleanout_method"]
+
     list_filter = ["aircraft_code", "aircraft_type", "cleanout_date", 'cleanout_method',
                    "cleanout_user", "cleanout_department", "cleanout_status",
                    ("next_clieanout_date", DateRangeFilter)]

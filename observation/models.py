@@ -14,7 +14,7 @@ class Observation(models.Model):
     sort_code = models.CharField(max_length=32, verbose_name="序号")
     tear_data = models.DateTimeField(verbose_name="拆下日期")
     work_user = models.ForeignKey(User, verbose_name="工作者")
-    observation_days = models.IntegerField(verbose_name="拆件天书")
+    observation_days = models.IntegerField(verbose_name="拆件天数")
     estimated_closing_date = models.DateTimeField(verbose_name="预计关闭日期")
     closed_date = models.DateTimeField(verbose_name="实际关闭日期")
     closed_user = models.ForeignKey(User, verbose_name="关闭者",

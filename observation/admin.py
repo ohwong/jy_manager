@@ -26,10 +26,14 @@ class ObservationAdmin(admin.ModelAdmin):
                      'closed_date',  'tear_data', 'tear_reason', 'observation_result']
 
     def get_readonly_fields(self, request, obj=None):
+        if obj is None:   # 添加
+            return []
+
         if obj and request.user and \
                 (request.user.is_superuser or request.user == obj.work_user):
             # 只有创建者和超级用户可以修改
             return []
+        # 其他用户查看或者修改
         return self.change_fields
 
     def get_fields(self, request, obj=None):

@@ -49,7 +49,7 @@ INSTALLED_APPS = (
     'import_export',
     'refused_order',
     'ckeditor',
-    'rangefilter',
+    # 'rangefilter',
     'date_range_filter',
     'observation',
 )
@@ -223,6 +223,10 @@ QINIU_ACCESS_KEY = ""
 QINIU_SECRET_KEY = ""
 QINIU_BUCKET_NAME = ""
 QINIU_BUCKET_DOMAIN = ""
+
+ALLOWED_HOSTS = [
+    '*', # <B8><B6>
+]
 
 try:
     from .local_settings import *

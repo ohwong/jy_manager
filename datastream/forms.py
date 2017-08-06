@@ -17,6 +17,3 @@ class DataStreamForm(forms.ModelForm):
                   'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
                   'strike_parts_num', 'mount_parts_code', 'fault_result',
                   'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day']
-
-    has_delayed = forms.ChoiceField(widget=forms.CheckboxInput, choices=YES_OR_NO, label="是否延误")
-    is_sdr = forms.ChoiceField(widget=forms.CheckboxInput, choices=YES_OR_NO, label="是否SDR  ")

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class RefusedOrder(models.Model):
-    """数据录入"""
+    """退单"""
 
     class Meta:
         verbose_name = verbose_name_plural = "退单"

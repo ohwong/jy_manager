@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class MissionType(models.Model):
@@ -8,6 +9,20 @@ class MissionType(models.Model):
         verbose_name = verbose_name_plural = "任务分类"
 
     name = models.CharField(verbose_name="名称", max_length=32)
+
+    def __str__(self):
+        return self.name
+
+
+class MissionImage(models.Model):
+    class Meta:
+        verbose_name = verbose_name_plural = "任务图片"
+        ordering = ['-created_at']
+
+    name = models.CharField(max_length=64, verbose_name="图片说明")
+    image = models.ImageField(verbose_name="任务图片")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="修改时间")
 
     def __str__(self):
         return self.name

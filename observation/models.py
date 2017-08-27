@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Observation(models.Model):
-    """值班"""
+    """观察件"""
     class Meta:
         verbose_name = verbose_name_plural = "观察件记录"
 

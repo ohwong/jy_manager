@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Mission, MissionType, ThisMonthMission, MyMonthMission
+from .models import Mission, MissionType, ThisMonthMission, MyMonthMission, MissionImage
 from .utils import current_date_range
 
 
@@ -75,7 +75,14 @@ class MyMonthMissionAdmin(MissionAdmin):
         queryset.update(status=1)
     make_finished.short_description = "标记为完成"
 
+
+class MissionImageAdmin(admin.ModelAdmin):
+    list_display = ["name", "created_at"]
+    search_fields = ['name']
+
+
 admin.site.register(MissionType, MissionTypeAdmin)
 admin.site.register(Mission, MissionAdmin)
 admin.site.register(ThisMonthMission, ThisMonthMissionAdmin)
 admin.site.register(MyMonthMission, MyMonthMissionAdmin)
+admin.site.register(MissionImage, MissionImageAdmin)

@@ -20,15 +20,23 @@ class DataStream(models.Model):
 
     FAULT_PHASE_CHOICES = (
         (1, "飞机BAT电门置于ON位到飞机最后一个舱门关闭"),
-        (2, "飞机最后一个舱门关闭到飞机启动双发(发动机慢车功率， 后缘襟翼放下5度)"),
-        (3, "双发启动后到双发达到起飞功率前(飞机在地面处于起飞构类)"),
-        (4, "双发达到起飞功率到空速>=130节"),
-        (5, "空速>=130节到飞机离地"),
-        (6, "飞机离地高度1500英尺(发动机起飞功率，襟翼<=5度)"),
-        (7, "高度1500英尺(发动机起飞功率，襟翼<=5度) 到高度1500英尺(发动机非起飞功率且襟翼>=25度)"),
-        (8, "高度1500英尺(发动机非起飞功率且襟翼>=25度)到机轮着地"),
-        (9, "机轮着地到空速<=80节(发动机反推开， 扰流板打开)"),
-        (10, "控诉<=80节到双发关车"),
+        (2, "飞机最后一个舱门关闭到飞机启动双发（发动机慢车功率，后缘襟翼放下5度）"),
+        (3, "双发启动后到双发达到起飞功率（飞机在地面，处于起飞构型）"),
+        (4, "双发达到起飞功率到空速≧130节"),
+        (5, "空速≧130节到飞机离地"),
+        (6, "飞机离地到高度1500英尺（发动机起飞功率，襟翼≦5度）"),
+        (7, "高度1500英尺（发动机起飞功率）到高度1500英尺（发动机非起飞功率且襟翼>25度）"),
+        (8, "高度1500英尺到机轮着地 "),
+        (9, "机轮着地到空速≦80节（飞机在地面，发动机反推工作，扰流板工作）"),
+        (10, "空速≦80节到双发关车"),
+    )
+
+    FAULT_TYPE_CHOICES = (
+        (1, "一般"),
+        (2, "突发"),
+        (3, "重复"),
+        (4, "疑难"),
+        (5, "重大"),
     )
 
     TEMPERATURE_CHOICE = (
@@ -45,7 +53,9 @@ class DataStream(models.Model):
     class Meta:
         verbose_name = verbose_name_plural = "数据录入"
 
-    the_date = models.DateField(verbose_name="日期")
+    the_year = models.IntegerField(verbose_name="年")
+    the_month = models.IntegerField(verbose_name="月")
+    the_day = models.IntegerField(verbose_name="日")
     aircraft_code = models.CharField(max_length=32, verbose_name="机号")
     flight_type = models.CharField(max_length=32, verbose_name="航班号")
     location = models.CharField(max_length=64, verbose_name="地点")
@@ -56,7 +66,7 @@ class DataStream(models.Model):
                                       default=1)
 
     fault_description = RichTextField(verbose_name="故障描述")
-    fault_type = models.CharField(max_length=64, verbose_name="故障类型")
+    fault_type = models.IntegerField(choices=FAULT_TYPE_CHOICES, verbose_name="故障类型", default=1)
     chapter = models.CharField(max_length=64, verbose_name="章")
     knob = models.CharField(max_length=64, verbose_name="节")
     deal_method = RichTextField(verbose_name="处理措施")
@@ -78,7 +88,8 @@ class DataStream(models.Model):
     fault_result = models.IntegerField(verbose_name="故障后果", choices=FAULT_RESULT_CHOICES,
                                        default=0)
     delay_reason = models.TextField(verbose_name="延误原因", blank=True, null=True)
-    delay_time = models.DateTimeField(verbose_name="延误时间", blank=True, null=True)
+    # 延误时间应客户要求改为Ｃhar类型
+    delay_time = models.CharField(verbose_name="延误时间", blank=True, null=True, max_length=64)
     has_delayed = models.IntegerField(default=0, choices=YES_OR_NO, verbose_name="是否延误")
     is_sdr = models.IntegerField(verbose_name="是否SDR", default=0, choices=YES_OR_NO)
     unexpected_stay_day = models.IntegerField(verbose_name="非计划停场天数", default=0)
@@ -90,6 +101,6 @@ class DataStream(models.Model):
                                    verbose_name="审核人员", blank=True, null=True)
     status = models.IntegerField(choices=STATUS_CHOICES, verbose_name="状态", default=1)
 
-
     def __str__(self):
-        return self.fault_type
+        return str(self.aircraft_code) + "-" + str(self.flight_type) + "-" +\
+               dict(self.FAULT_PHASE_CHOICES).get(self.fault_phase)

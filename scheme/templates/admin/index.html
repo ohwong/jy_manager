@@ -1,0 +1,24 @@
+{% extends "admin/base_site.html" %}
+{% load scheme_tags %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}
+{{ block.super }}
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <img  src="{% current_scheme %}">
+</div>
+{% endblock %}
+
+
+{% block sidebar %}
+
+{% endblock %}

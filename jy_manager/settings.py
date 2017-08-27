@@ -32,9 +32,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'scheme',
     'easy_thumbnails',
     'filer',
     'mptt',
+    'datastream',
     'suit',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,9 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'event_handover',
-    'scheme',
     'cleanout',
-    'datastream',
     'import_export',
     'refused_order',
     'ckeditor',
@@ -190,7 +190,9 @@ SUIT_CONFIG = {
         {'app': 'auth', 'icon': 'icon-lock', 'models': ('user', 'group')},
         {'label': '工作安排', 'icon': 'icon-th', 'models':
             ('scheme.missiontype', 'scheme.mission',
-             'scheme.thismonthmission', 'scheme.mymonthmission')},
+             'scheme.thismonthmission', 'scheme.mymonthmission',
+             'scheme.MissionImage',
+             )},
         {'label': '退单', 'icon': 'icon-refresh', 'models':  ('refused_order.refusedorder', )},
         {'label': '事件交接', 'icon': 'icon-retweet', 'models':  ('event_handover.HandEvent', )},
         {'label': '数据录入', 'icon': 'icon-qrcode', 'models':  ('datastream.datastream', )},
@@ -215,9 +217,11 @@ CKEDITOR_CONFIGS = {
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['Link', 'Unlink'],
             ['RemoveFormat', 'ColorDialog']
-        ]
+        ],
+        'height': 160,
     }
 }
+
 STATIC_ROOT = '/var/www/project/jy_manager/'
 QINIU_ACCESS_KEY = ""
 QINIU_SECRET_KEY = ""

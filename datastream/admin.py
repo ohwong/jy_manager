@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import mark_safe, strip_tags
 
 from .models import DataStream
 from .forms import DataStreamForm
@@ -15,7 +16,7 @@ class DataStreamResource(resources.ModelResource):
 
 
 class DataStreamAdmin(ImportExportModelAdmin):
-    list_filter = [('the_date', DateRangeFilter), 'aircraft_code', 'flight_type', 'location',
+    list_filter = ['the_year',  'the_month', 'the_day',  'aircraft_code', 'flight_type', 'location',
                    'weather', 'temperature',  'fault_type',
                    'chapter', 'knob', 'deal_method', 'is_sdr', "fault_result",
                    'has_delayed', 'has_checked', "status"]
@@ -24,28 +25,52 @@ class DataStreamAdmin(ImportExportModelAdmin):
                       'record_paper_code', 'parts_name', 'strike_parts_code',
                       'strike_parts_num', 'mount_parts_code', 'fault_result']
 
-    list_display = ['the_date', 'aircraft_code', 'location', 'chapter', 'knob',
-                    'fault_phase', 'fault_description', 'deal_method', 'has_delayed', "status"]
+    list_display = ['the_year',  'the_month', 'the_day', 'aircraft_code', 'location', 'chapter', 'knob',
+                    'fault_phase', 'fault_description_strip', 'deal_method_strip', 'has_delayed', "status"]
 
     resource_class = DataStreamResource
+    suit_form_tabs = (('base', '基本信息'), ('fault', '故障信息'), ('delay', '延误信息'),
+                      ('deal', '处理信息'),)
 
-    add_fields = ['the_date', 'aircraft_code', 'flight_type', 'location',
+    fieldsets = (
+
+
+        ("基本信息", {
+            'classes': ('suit-tab suit-tab-base',),
+            'fields': ('aircraft_code', 'flight_type', 'the_day', 'location', 'weather', 'temperature', "status")
+        }),
+        ('故障信息', {
+            'classes': ('suit-tab suit-tab-fault',),
+            'fields': ('fault_phase', 'fault_type', 'fault_result',
+                       'fault_description', ),
+        }),
+        ('延误信息', {
+            'classes': ('suit-tab suit-tab-delay',),
+            'fields': ('has_delayed',  'unexpected_stay_day',  'delay_time', 'delay_reason', ),
+        }),
+        ('处理信息', {
+            'classes': ('suit-tab suit-tab-deal',),
+            'fields': ('chapter', 'knob', 'is_sdr', 'record_paper_code', 'mel_or_cdl_file',
+                       'parts_name', 'strike_parts_code', 'strike_parts_num', 'mount_parts_code',
+                       'deal_method'),
+        }),
+    )
+
+    add_fields = ['the_year',  'the_month', 'the_day', 'aircraft_code', 'flight_type', 'location',
                   'weather', 'temperature', 'fault_phase',
                   'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
                   'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
                   'strike_parts_num', 'mount_parts_code', 'fault_result',
                   'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day',
                   "status"]
-              # exclude create_user create_time
 
-    change_fields = ['the_date', 'aircraft_code', 'flight_type', 'location',
-                    'weather', 'temperature', 'fault_phase',
-                    'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
-                    'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
-                    'strike_parts_num', 'mount_parts_code', 'fault_result',
-                    'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day',
+    change_fields = ['the_year',  'the_month', 'the_day', 'aircraft_code', 'flight_type', 'location',
+                     'weather', 'temperature', 'fault_phase',
+                     'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
+                     'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
+                     'strike_parts_num', 'mount_parts_code', 'fault_result',
+                     'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day',
                      "status"]
-              # exclude create_user create_time
 
     form = DataStreamForm
 
@@ -84,5 +109,13 @@ class DataStreamAdmin(ImportExportModelAdmin):
         if request.user.is_superuser:
             return qs
         return qs.filter(create_user=request.user)
+
+    def fault_description_strip(self, obj):
+        return strip_tags(obj.fault_description)
+    fault_description_strip.short_description = '故障描述'
+
+    def deal_method_strip(self, obj):
+        return strip_tags(obj.deal_method)
+    deal_method_strip.short_description = '处理措施'
 
 admin.site.register(DataStream, DataStreamAdmin)

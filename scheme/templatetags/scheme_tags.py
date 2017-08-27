@@ -13,3 +13,5 @@ def current_scheme():
         return MissionImage.objects.last().image.url
     except AttributeError:
         return ""
+
+

@@ -25,7 +25,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
                       'record_paper_code', 'parts_name', 'strike_parts_code',
                       'strike_parts_num', 'mount_parts_code', 'fault_result']
 
-    list_display = ['the_year',  'the_month', 'the_day', 'aircraft_code', 'location', 'chapter', 'knob',
+    list_display = ['the_year', 'the_month', 'the_day', 'aircraft_code', 'location', 'chapter', 'knob',
                     'fault_phase', 'fault_description_strip', 'deal_method_strip', 'has_delayed', "status"]
 
     resource_class = DataStreamResource
@@ -37,7 +37,8 @@ class DataStreamAdmin(ImportExportModelAdmin):
 
         ("基本信息", {
             'classes': ('suit-tab suit-tab-base',),
-            'fields': ('aircraft_code', 'flight_type', 'the_day', 'location', 'weather', 'temperature', "status")
+            'fields': ('aircraft_code', 'flight_type', 'the_year', 'the_month', 'the_day',
+                       'location', 'weather', 'temperature', "status")
         }),
         ('故障信息', {
             'classes': ('suit-tab suit-tab-fault',),

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 from ckeditor.fields import RichTextField
 
 
@@ -53,9 +54,9 @@ class DataStream(models.Model):
     class Meta:
         verbose_name = verbose_name_plural = "数据录入"
 
-    the_year = models.IntegerField(verbose_name="年")
-    the_month = models.IntegerField(verbose_name="月")
-    the_day = models.IntegerField(verbose_name="日")
+    the_year = models.IntegerField(verbose_name="年", default=timezone.now().year)
+    the_month = models.IntegerField(verbose_name="月", default=timezone.now().month)
+    the_day = models.IntegerField(verbose_name="日", default=timezone.now().day)
     aircraft_code = models.CharField(max_length=32, verbose_name="机号")
     flight_type = models.CharField(max_length=32, verbose_name="航班号")
     location = models.CharField(max_length=64, verbose_name="地点")
@@ -65,13 +66,13 @@ class DataStream(models.Model):
     fault_phase = models.IntegerField(verbose_name="故障阶段", choices=FAULT_PHASE_CHOICES,
                                       default=1)
 
-    fault_description = RichTextField(verbose_name="故障描述")
+    fault_description = RichTextField(verbose_name="故障描述", blank=True, null=True)
     fault_type = models.IntegerField(choices=FAULT_TYPE_CHOICES, verbose_name="故障类型", default=1)
-    chapter = models.CharField(max_length=64, verbose_name="章")
-    knob = models.CharField(max_length=64, verbose_name="节")
-    deal_method = RichTextField(verbose_name="处理措施")
-    after_deal_method = RichTextField(verbose_name="后续处理措施")
-    record_paper_code = models.CharField(max_length=64, verbose_name="记录纸号")
+    chapter = models.CharField(max_length=64, verbose_name="章", blank=True, null=True)
+    knob = models.CharField(max_length=64, verbose_name="节", blank=True, null=True)
+    deal_method = RichTextField(verbose_name="处理措施", blank=True, null=True)
+    after_deal_method = RichTextField(verbose_name="后续处理措施", blank=True, null=True)
+    record_paper_code = models.CharField(max_length=64, verbose_name="记录纸号", blank=True, null=True)
     mel_or_cdl_file = models.CharField(max_length=64, verbose_name="MEL/CDL依据文件",
                                        blank=True, null=True)
     parts_name = models.CharField(max_length=64, verbose_name="拆换件名称",
@@ -98,7 +99,7 @@ class DataStream(models.Model):
 
     create_user = models.ForeignKey(User, verbose_name="录入人员")
     has_checked = models.BooleanField(verbose_name="完成审核?", default=False)
-    check_user = models.ForeignKey(User,related_name="check_user",
+    check_user = models.ForeignKey(User, related_name="check_user",
                                    verbose_name="审核人员", blank=True, null=True)
     status = models.IntegerField(choices=STATUS_CHOICES, verbose_name="状态", default=1)
 

@@ -196,8 +196,8 @@ def parse_day(value):
         return cached["day"]
 
 def parse_user(user):
-    obj, status = User.objects.get_or_create(username=str(user.strip()),
-                                             password="9air.com", defaults={"is_staff": True})
+    obj, status = User.objects.get_or_create(username=str(user.strip()), defaults={
+        "is_staff": True, "password": "9air.com"})
     return obj
 
 

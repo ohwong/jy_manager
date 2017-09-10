@@ -7,6 +7,25 @@ from .forms import DataStreamForm
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from date_range_filter import DateRangeFilter
+from datastream.forms import SingleTextInputFilter
+
+
+class KnobFilter(SingleTextInputFilter):
+    title = '节'
+    parameter_name = 'knob'
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(knob__iexact=self.value())
+
+
+class ChapterFilter(SingleTextInputFilter):
+    title = '章'
+    parameter_name = 'chapter'
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(chapter__iexact=self.value())
 
 
 class DataStreamResource(resources.ModelResource):
@@ -18,12 +37,12 @@ class DataStreamResource(resources.ModelResource):
 class DataStreamAdmin(ImportExportModelAdmin):
     list_filter = ['the_year',  'the_month', 'the_day',  'aircraft_code', 'flight_type', 'location',
                    'weather', 'temperature',  'fault_type',
-                   'chapter', 'knob', 'deal_method', 'is_sdr', "fault_result",
+                   ChapterFilter, KnobFilter, 'is_sdr', "fault_result",
                    'has_delayed', 'has_checked', "status"]
 
     search_fields = ['fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
-                      'record_paper_code', 'parts_name', 'strike_parts_code',
-                      'strike_parts_num', 'mount_parts_code', 'fault_result']
+                     'record_paper_code', 'parts_name', 'strike_parts_code',
+                     'strike_parts_num', 'mount_parts_code', 'fault_result']
 
     list_display = ['the_year', 'the_month', 'the_day', 'aircraft_code', 'location', 'chapter', 'knob',
                     'fault_phase', 'fault_description_strip', 'deal_method_strip', 'has_delayed', "status"]
@@ -47,7 +66,8 @@ class DataStreamAdmin(ImportExportModelAdmin):
         }),
         ('延误信息', {
             'classes': ('suit-tab suit-tab-delay',),
-            'fields': ('has_delayed',  'unexpected_stay_day',  'delay_time', 'delay_reason', ),
+            'fields': ('has_delayed',  'unexpected_stay_day',  'delay_time', 'delay_reason',
+                       "after_deal_method"),
         }),
         ('处理信息', {
             'classes': ('suit-tab suit-tab-deal',),

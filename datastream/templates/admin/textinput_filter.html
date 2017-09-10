@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{#i for item, to be short in names#}
+{% with choices.0 as i %}
+
+
+<input type="text"  placeholder="{% blocktrans with filter_title=title %}  {{ filter_title }} {% endblocktrans %}"  name="{{ i.parameter_name }}" value="{{ i.current_value|default_if_none:'' }}"/>
+
+{#create hidden inputs to preserve values from other filters and search field#}
+{% for k, v in i.get_query.items %}
+{% if not k == i.parameter_name %}
+<input type="hidden" name="{{ k }}" value="{{ v }}">
+{% endif %}
+{% endfor %}
+{% endwith %}

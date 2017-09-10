@@ -70,6 +70,7 @@ class DataStream(models.Model):
     chapter = models.CharField(max_length=64, verbose_name="章")
     knob = models.CharField(max_length=64, verbose_name="节")
     deal_method = RichTextField(verbose_name="处理措施")
+    after_deal_method = RichTextField(verbose_name="后续处理措施")
     record_paper_code = models.CharField(max_length=64, verbose_name="记录纸号")
     mel_or_cdl_file = models.CharField(max_length=64, verbose_name="MEL/CDL依据文件",
                                        blank=True, null=True)

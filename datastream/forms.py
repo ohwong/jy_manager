@@ -2,6 +2,9 @@ from django import forms
 from .models import DataStream
 from django.contrib.admin import ListFilter
 from django.contrib.auth import ImproperlyConfigured
+from django.utils.html import mark_safe, strip_tags
+
+from ckeditor.widgets import CKEditorWidget
 
 YES_OR_NO = (
     (0, "否"),
@@ -11,6 +14,8 @@ YES_OR_NO = (
 
 
 class DataStreamForm(forms.ModelForm):
+
+
     class Meta:
         model = DataStream
         fields = ['the_year',  'the_month', 'the_day', 'aircraft_code', 'flight_type', 'location',
@@ -19,6 +24,18 @@ class DataStreamForm(forms.ModelForm):
                   'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
                   'strike_parts_num', 'mount_parts_code', 'fault_result',
                   'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day']
+
+    def __init__(self, *args, **kwargs):
+        super(DataStreamForm, self).__init__(*args, **kwargs)
+        instance = getattr(self, 'instance', None)
+        if instance and hasattr(instance, "fault_description"):
+
+            instance.fault_description = strip_tags(instance.fault_description)
+        if instance and hasattr(instance, "deal_method"):
+            instance.deal_method = strip_tags(instance.deal_method)
+
+        if instance and hasattr(instance, "after_deal_method"):
+            instance.after_deal_method = strip_tags(instance.after_deal_method)
 
 
 class SingleTextInputFilter(ListFilter):

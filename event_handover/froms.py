@@ -1,7 +1,6 @@
 from django.forms import ModelForm
 
 
-
 class CommentChangeForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(CommentChangeForm, self).__init__(*args, **kwargs)

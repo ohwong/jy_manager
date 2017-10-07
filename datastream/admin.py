@@ -42,7 +42,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
 
     search_fields = ['fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
                      'record_paper_code', 'parts_name', 'strike_parts_code',
-                     'strike_parts_num', 'mount_parts_code', 'fault_result']
+                     'strike_parts_num', 'mount_parts_code', 'fault_result',  'mount_parts_num', ]
 
     list_display = ['the_year', 'the_month', 'the_day', 'aircraft_code', 'location', 'chapter', 'knob',
                     'fault_phase', 'fault_description_strip', 'deal_method_strip', 'has_delayed', "status"]
@@ -73,7 +73,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
             'classes': ('suit-tab suit-tab-deal',),
             'fields': ('chapter', 'knob', 'is_sdr', 'record_paper_code', 'mel_or_cdl_file',
                        'parts_name', 'strike_parts_code', 'strike_parts_num', 'mount_parts_code',
-                       'deal_method'),
+                       'mount_parts_num', 'deal_method'),
         }),
     )
 
@@ -81,7 +81,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
                   'weather', 'temperature', 'fault_phase',
                   'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
                   'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
-                  'strike_parts_num', 'mount_parts_code', 'fault_result',
+                  'strike_parts_num', 'mount_parts_code', 'mount_parts_num', 'fault_result',
                   'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day',
                   "status"]
 
@@ -89,7 +89,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
                      'weather', 'temperature', 'fault_phase',
                      'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
                      'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
-                     'strike_parts_num', 'mount_parts_code', 'fault_result',
+                     'strike_parts_num', 'mount_parts_code',  'mount_parts_num', 'fault_result',
                      'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day',
                      "status"]
 

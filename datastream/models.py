@@ -9,7 +9,7 @@ def current_year():
 
 
 def current_month():
-    return timezone.now().mouth
+    return timezone.now().month
 
 
 def current_day():

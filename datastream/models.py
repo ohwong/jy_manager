@@ -4,6 +4,18 @@ from django.utils import timezone
 from ckeditor.fields import RichTextField
 
 
+def current_year():
+    return timezone.now().year
+
+
+def current_month():
+    return timezone.now().mouth
+
+
+def current_day():
+    return timezone.now().day
+
+
 class DataStream(models.Model):
     """数据录入"""
     YES_OR_NO = (
@@ -54,9 +66,9 @@ class DataStream(models.Model):
     class Meta:
         verbose_name = verbose_name_plural = "数据录入"
 
-    the_year = models.IntegerField(verbose_name="年", default=timezone.now().year)
-    the_month = models.IntegerField(verbose_name="月", default=timezone.now().month)
-    the_day = models.IntegerField(verbose_name="日", default=timezone.now().day)
+    the_year = models.IntegerField(verbose_name="年", default=current_year)
+    the_month = models.IntegerField(verbose_name="月", default=current_month)
+    the_day = models.IntegerField(verbose_name="日", default=current_day)
     aircraft_code = models.CharField(max_length=32, verbose_name="机号")
     flight_type = models.CharField(max_length=32, verbose_name="航班号")
     location = models.CharField(max_length=64, verbose_name="地点")

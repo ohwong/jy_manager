@@ -16,7 +16,7 @@ class Observation(models.Model):
     work_user = models.ForeignKey(User, verbose_name="工作者")
     observation_days = models.IntegerField(verbose_name="拆件天数")
     estimated_closing_date = models.DateTimeField(verbose_name="预计关闭日期")
-    closed_date = models.DateTimeField(verbose_name="实际关闭日期")
+    closed_date = models.DateTimeField(verbose_name="实际关闭日期", blank=True, null=True)
     closed_user = models.ForeignKey(User, verbose_name="关闭者",
                                     related_name="closed_user", blank=True, null=True)
     tear_reason = RichTextField(verbose_name="拆件原因", blank=True, null=True)

@@ -40,6 +40,7 @@ class HandEvent(models.Model):
 class Comment(models.Model):
     class Meta:
         verbose_name = verbose_name_plural = "事件交接评论"
+        ordering = ['-created_at']
 
     hand_event = models.ForeignKey(HandEvent, verbose_name="事件")
     content = RichTextField(verbose_name="内容")

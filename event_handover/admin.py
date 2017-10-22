@@ -24,7 +24,8 @@ class HandEventCommentInline(admin.TabularInline):
 
 class HandEventAdmin(ImportExportModelAdmin):
     list_display = ["aircraft_code", "aircraft_type", "subject", "chapter_code",
-                    "handover_type", "publish_user", "published_time", "status"]
+                    "handover_type", "publish_user", "recently_review",
+                    "published_time", "status"]
     list_editable = ["status"]
 
     exclude = ['publish_user']
@@ -73,5 +74,13 @@ class HandEventAdmin(ImportExportModelAdmin):
             )
             inline_admin_formsets.append(inline_admin_formset)
         return inline_admin_formsets
+
+    def recently_review(self, obj):
+        comment = Comment.objects.filter(hand_event=obj).last()
+        if comment:
+            return comment.user.username + " " + \
+                   comment.created_at.strftime("%Y-%m-%d %H:%M:%S")
+        return "暂无回复"
+    recently_review.short_description = "最新回复"
 
 admin.site.register(HandEvent, HandEventAdmin)

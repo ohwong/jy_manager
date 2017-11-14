@@ -76,7 +76,7 @@ class HandEventAdmin(ImportExportModelAdmin):
         return inline_admin_formsets
 
     def recently_review(self, obj):
-        comment = Comment.objects.filter(hand_event=obj).last()
+        comment = Comment.objects.filter(hand_event=obj).first()
         if comment:
             return comment.user.username + " " + \
                    comment.created_at.strftime("%Y-%m-%d %H:%M:%S")

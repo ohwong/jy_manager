@@ -98,7 +98,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if obj is None:
             return []
-        elif obj.create_user == request.user and obj.has_checked is False:
+        elif (obj.create_user == request.user and obj.has_checked is False) or request.user.is_superuser:
             return []
         return self.change_fields
 

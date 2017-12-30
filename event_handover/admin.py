@@ -45,6 +45,11 @@ class HandEventAdmin(ImportExportModelAdmin):
             return self.change_readonly_fields
         return []
 
+    def get_queryset(self, request):
+        from django.db.models import Max
+        qs = super(HandEventAdmin, self).get_queryset(request)
+        return qs.annotate(comment_time=Max("comment__created_at")).order_by("-comment_time")
+
     def save_model(self, request, obj, form, change):
         if not change:
             obj.publish_user = request.user
@@ -82,5 +87,6 @@ class HandEventAdmin(ImportExportModelAdmin):
                    comment.created_at.strftime("%Y-%m-%d %H:%M:%S")
         return "暂无回复"
     recently_review.short_description = "最新回复"
+    # recently_review.admin_order_field = '-comment__created_at'
 
 admin.site.register(HandEvent, HandEventAdmin)

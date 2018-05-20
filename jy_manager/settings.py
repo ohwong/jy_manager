@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'aircraft',
     'event_handover',
     'cleanout',
     'import_export',
@@ -52,6 +53,7 @@ INSTALLED_APPS = (
     # 'rangefilter',
     'date_range_filter',
     'observation',
+    'mcc'
 )
 
 
@@ -188,6 +190,7 @@ SUIT_CONFIG = {
     'MENU': (
         'sites',
         {'app': 'auth', 'icon': 'icon-lock', 'models': ('user', 'group')},
+        {'label': '机号管理', 'icon': 'icon-plane', 'models':  ('aircraft.Aircraft', )},
         {'label': '工作安排', 'icon': 'icon-th', 'models':
             ('scheme.missiontype', 'scheme.mission',
              'scheme.thismonthmission', 'scheme.mymonthmission',
@@ -198,6 +201,7 @@ SUIT_CONFIG = {
         {'label': '数据录入', 'icon': 'icon-qrcode', 'models':  ('datastream.datastream', )},
         {'label': '飞机清洗', 'icon': 'icon-plane', 'models':  ('cleanout.AirCraftCleanOut', )},
         {'label': '故障观察件', 'icon': 'icon-leaf', 'models':  ('observation.Observation', )},
+        {'label': 'MCC指令编写', 'icon': 'icon-qrcode', 'models':  ('mcc.MCC', )},
         {'label': '文件管理', 'icon': 'icon-file', 'models':  ('filer.folder', )},
 
     ),

@@ -4,6 +4,11 @@ from django.contrib import admin
 from django.template.response import SimpleTemplateResponse, TemplateResponse
 from django.forms import model_to_dict
 
+from django.http import HttpResponse
+from wsgiref.util import FileWrapper
+import weasyprint, pdfkit
+from io import BytesIO
+
 from .models import MCC, MccEquipment
 
 
@@ -69,38 +74,16 @@ class MCCAdmin(admin.ModelAdmin):
         response = TemplateResponse(
             request, 'mcc/mcc.html', c
         )
-        return response
-        # rendered_content = response.rendered_content
-        #
-        # from django.http import HttpResponse
-        # from wsgiref.util import FileWrapper
-        # import weasyprint, pdfkit
-        # pdf = weasyprint.HTML(string=rendered_content).write_pdf()
-        #
-        # from io import BytesIO
-        #
-        # buffer = BytesIO(pdf)
-        # response = HttpResponse(FileWrapper(buffer), content_type='application/pdf')
-        # response['Content-Disposition'] = 'attachment; filename=mcc_download.pdf'
         # return response
-        #
-        #
-        # from io import BytesIO
-        # from django.http import HttpResponse
-        # import xhtml2pdf.pisa as pisa
-        # from django.template.loader import get_template
-        # import weasyprint, pdfkit
-        #
-        # def render(path: str, params: dict):
-        #     template = get_template(path)
-        #     html = template.render(params)
-        #     response = BytesIO()
-        #     pdf = pisa.pisaDocument(BytesIO(html.encode()), response)
-        #     if pdf:
-        #         return HttpResponse(response.getvalue(), content_type='application/pdf')
-        #     else:
-        #         return HttpResponse("Error Rendering PDF", status=400)
-        # return render('mcc/mcc.html', c)
+        rendered_content = response.rendered_content
+
+        pdf = weasyprint.HTML(string=rendered_content).write_pdf()
+
+
+        buffer = BytesIO(pdf)
+        response = HttpResponse(FileWrapper(buffer), content_type='application/pdf')
+        return response
+
 
     def get_urls(self):
         from django.conf.urls import url

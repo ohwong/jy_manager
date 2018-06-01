@@ -23,7 +23,7 @@ class HandEventCommentInline(admin.TabularInline):
 
 
 class HandEventAdmin(ImportExportModelAdmin):
-    list_display = ["aircraft_code", "aircraft_type", "subject", "chapter_code",
+    list_display = ["aircraft", "aircraft_type", "subject", "chapter_code",
                     "handover_type", "publish_user", "recently_review",
                     "published_time", "status"]
     list_editable = ["status"]
@@ -32,12 +32,12 @@ class HandEventAdmin(ImportExportModelAdmin):
     inlines = [HandEventCommentInline]
     resource_class = HandEventResource
 
-    change_readonly_fields = ["aircraft_code", "aircraft_type", "subject", "chapter_code",
+    change_readonly_fields = ["aircraft", "aircraft_type", "subject", "chapter_code",
                               "handover_type", "publish_user", "published_time"]
 
-    list_filter = ["aircraft_code", "aircraft_type", "subject", "chapter_code",
+    list_filter = ["aircraft", "aircraft_type", "subject", "chapter_code",
                     "handover_type", "publish_user", ('published_time', DateRangeFilter), "status"]
-    search_fields = ["aircraft_code", "aircraft_type", "subject", "chapter_code",
+    search_fields = ["aircraft", "aircraft_type", "subject", "chapter_code",
                      "handover_type"]
 
     def get_readonly_fields(self, request, obj=None):

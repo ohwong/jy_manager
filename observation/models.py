@@ -10,7 +10,6 @@ class Observation(models.Model):
         verbose_name = verbose_name_plural = "观察件记录"
 
     name = models.CharField(max_length=64, verbose_name="名称")
-    aircraft_code = models.CharField(max_length=32, verbose_name="机号")
     aircraft = models.ForeignKey(Aircraft, verbose_name="机号")
     item_code = models.CharField(max_length=32, verbose_name="件号")
     sort_code = models.CharField(max_length=32, verbose_name="序号")

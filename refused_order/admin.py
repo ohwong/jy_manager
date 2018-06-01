@@ -13,19 +13,19 @@ class RefusedOrderResource(resources.ModelResource):
 
 
 class RefusedOrderAdmin(ImportExportModelAdmin):
-    list_display = ['created_at', 'aircraft_code',  'terminal', 'worker_code',
+    list_display = ['created_at', 'aircraft',  'terminal', 'worker_code',
                     'worker_content', 'apply_user', "deal_user",  'note',
                     'has_applied']
 
-    change_fields = ['aircraft_code', 'terminal', 'worker_code',
+    change_fields = ['aircraft', 'terminal', 'worker_code',
                      'worker_content', 'note', 'has_applied']
 
-    add_fields = ['aircraft_code', 'terminal', 'worker_code',
+    add_fields = ['aircraft', 'terminal', 'worker_code',
                   'worker_content', 'note']
 
     resource_class = RefusedOrderResource
     actions = ['make_checked']
-    list_filter = [('created_at', DateRangeFilter), 'aircraft_code',
+    list_filter = [('created_at', DateRangeFilter), 'aircraft',
                    'terminal', 'worker_code', 'worker_content',
                    'apply_user', "deal_user",  'note', 'has_applied']
 

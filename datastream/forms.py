@@ -18,7 +18,7 @@ class DataStreamForm(forms.ModelForm):
 
     class Meta:
         model = DataStream
-        fields = ['the_year',  'the_month', 'the_day', 'aircraft_code', 'flight_type', 'location',
+        fields = ['the_year',  'the_month', 'the_day', 'aircraft', 'flight_type', 'location',
                   'weather', 'temperature', 'fault_phase',
                   'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
                   'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',

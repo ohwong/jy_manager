@@ -75,7 +75,6 @@ class DataStream(models.Model):
     the_year = models.IntegerField(verbose_name="年", default=current_year)
     the_month = models.IntegerField(verbose_name="月", default=current_month)
     the_day = models.IntegerField(verbose_name="日", default=current_day)
-    aircraft_code = models.CharField(max_length=32, verbose_name="机号")
     aircraft = models.ForeignKey(Aircraft, verbose_name="机号")
 
     flight_type = models.CharField(max_length=32, verbose_name="航班号")
@@ -124,5 +123,5 @@ class DataStream(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, verbose_name="状态", default=1)
 
     def __str__(self):
-        return str(self.aircraft_code) + "-" + str(self.flight_type) + "-" +\
+        return str(self.aircraft) + "-" + str(self.flight_type) + "-" +\
                dict(self.FAULT_PHASE_CHOICES).get(self.fault_phase)

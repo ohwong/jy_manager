@@ -6,22 +6,22 @@ from date_range_filter import DateRangeFilter
 
 @admin.register(Observation)
 class ObservationAdmin(admin.ModelAdmin):
-    list_display = ['name', 'aircraft_code', 'item_code', 'sort_code',
+    list_display = ['name', 'aircraft', 'item_code', 'sort_code',
                     'tear_data', 'work_user', 'observation_days',
                     'estimated_closing_date', 'closed_date', 'closed_user']
 
-    list_filter = ['name', 'aircraft_code', 'item_code', 'sort_code',
+    list_filter = ['name', 'aircraft', 'item_code', 'sort_code',
                     'tear_data', 'work_user', 'observation_days', 'closed_user',
                     'tear_reason', 'observation_result',
                    ('estimated_closing_date', DateRangeFilter),
                    ('closed_date', DateRangeFilter)]
 
-    add_fields = ['name', 'aircraft_code', 'item_code', 'sort_code',
+    add_fields = ['name', 'aircraft', 'item_code', 'sort_code',
                   'tear_data', 'observation_days',
                   'estimated_closing_date', 'closed_date',
                   'tear_reason', 'observation_result']
 
-    change_fields = ['closed_user', 'name', 'aircraft_code', 'item_code', 'sort_code',
+    change_fields = ['closed_user', 'name', 'aircraft', 'item_code', 'sort_code',
                      'work_user', 'observation_days', 'estimated_closing_date',
                      'closed_date',  'tear_data', 'tear_reason', 'observation_result']
 

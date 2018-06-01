@@ -23,7 +23,7 @@ class MCCAdmin(admin.ModelAdmin):
 
     search_fields = []
 
-    list_display = ['order', 'aircraft_code', 'terminal', 'date']
+    list_display = ['order', 'aircraft', 'terminal', 'date']
 
     suit_form_tabs = (('base', '基本信息'), ('equipment', '航材与工装设备信'), ('feedback', '工作反馈'))
     inlines = [MccEquipmentAdmin]
@@ -33,7 +33,7 @@ class MCCAdmin(admin.ModelAdmin):
 
         ("基本信息", {
             'classes': ('suit-tab suit-tab-base',),
-            'fields': ('order', 'aircraft_code', 'terminal', 'date', 'discrepancy_or_reason',
+            'fields': ('order', 'aircraft', 'terminal', 'date', 'discrepancy_or_reason',
                        'work_content')
         }),
         ('计划工时', {

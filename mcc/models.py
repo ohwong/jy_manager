@@ -11,7 +11,6 @@ class MCC(models.Model):
 
     # 基本信息
     order = models.CharField(max_length=32, verbose_name='工作指令')
-    aircraft_code = models.CharField(max_length=32, verbose_name="机号")
     aircraft = models.ForeignKey(Aircraft, verbose_name="机号")
     terminal = models.CharField(max_length=32, verbose_name="航站")
     date = models.DateField(verbose_name="日期")

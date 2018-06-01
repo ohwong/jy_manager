@@ -23,8 +23,7 @@ class HandEvent(models.Model):
         (1, "open")
     )
 
-    aircraft_code = models.CharField(max_length=32, verbose_name="机号")
-    aircraft = models.ForeignKey(Aircraft)
+    aircraft = models.ForeignKey(Aircraft, verbose_name="机号")
     aircraft_type = models.IntegerField(verbose_name="机型", choices=AIRCRAFT_TYPE_CHOICES,
                                         default=1)
     subject = models.CharField(max_length=191, verbose_name="主题")
@@ -36,7 +35,7 @@ class HandEvent(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, verbose_name="状态", default=1)
 
     def __str__(self):
-        return str(self.aircraft_code) + "_" + str(self.aircraft_type)
+        return str(self.aircraft) + "_" + str(self.aircraft_type)
 
 
 class Comment(models.Model):

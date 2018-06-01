@@ -35,7 +35,7 @@ class DataStreamResource(resources.ModelResource):
 
 
 class DataStreamAdmin(ImportExportModelAdmin):
-    list_filter = ['the_year',  'the_month', 'the_day',  'aircraft_code', 'flight_type', 'location',
+    list_filter = ['the_year',  'the_month', 'the_day',  'aircraft', 'flight_type', 'location',
                    'weather', 'temperature',  'fault_type',
                    ChapterFilter, KnobFilter, 'is_sdr', "fault_result",
                    'has_delayed', 'has_checked', ]
@@ -44,7 +44,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
                      'record_paper_code', 'parts_name', 'strike_parts_code',
                      'strike_parts_num', 'mount_parts_code', 'fault_result',  'mount_parts_num', ]
 
-    list_display = ['the_year', 'the_month', 'the_day', 'aircraft_code', 'location', 'chapter', 'knob',
+    list_display = ['the_year', 'the_month', 'the_day', 'aircraft', 'location', 'chapter', 'knob',
                     'fault_phase', 'fault_description_strip', 'deal_method_strip', 'has_delayed', ]
 
     resource_class = DataStreamResource
@@ -56,7 +56,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
 
         ("基本信息", {
             'classes': ('suit-tab suit-tab-base',),
-            'fields': ('aircraft_code', 'flight_type', 'the_year', 'the_month', 'the_day',
+            'fields': ('aircraft', 'flight_type', 'the_year', 'the_month', 'the_day',
                        'location', 'weather', 'temperature')
         }),
         ('故障信息', {
@@ -77,7 +77,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
         }),
     )
 
-    add_fields = ['the_year',  'the_month', 'the_day', 'aircraft_code', 'flight_type', 'location',
+    add_fields = ['the_year',  'the_month', 'the_day', 'aircraft', 'flight_type', 'location',
                   'weather', 'temperature', 'fault_phase',
                   'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
                   'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',
@@ -85,7 +85,7 @@ class DataStreamAdmin(ImportExportModelAdmin):
                   'delay_reason', 'delay_time', 'has_delayed', 'is_sdr', 'unexpected_stay_day',
                   ]
 
-    change_fields = ['the_year',  'the_month', 'the_day', 'aircraft_code', 'flight_type', 'location',
+    change_fields = ['the_year',  'the_month', 'the_day', 'aircraft', 'flight_type', 'location',
                      'weather', 'temperature', 'fault_phase',
                      'fault_description', 'fault_type', 'chapter', 'knob', 'deal_method',
                      'record_paper_code', 'mel_or_cdl_file', 'parts_name', 'strike_parts_code',

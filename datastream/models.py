@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from aircraft.models import Aircraft
 
 
 def current_year():
@@ -75,6 +76,8 @@ class DataStream(models.Model):
     the_month = models.IntegerField(verbose_name="月", default=current_month)
     the_day = models.IntegerField(verbose_name="日", default=current_day)
     aircraft_code = models.CharField(max_length=32, verbose_name="机号")
+    aircraft = models.ForeignKey(Aircraft, verbose_name="机号")
+
     flight_type = models.CharField(max_length=32, verbose_name="航班号")
     location = models.CharField(max_length=64, verbose_name="地点")
     weather = models.CharField(max_length=64, verbose_name="天气")

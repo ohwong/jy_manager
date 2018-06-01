@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
+from aircraft.models import Aircraft
 
 
 class Observation(models.Model):
@@ -10,6 +11,7 @@ class Observation(models.Model):
 
     name = models.CharField(max_length=64, verbose_name="名称")
     aircraft_code = models.CharField(max_length=32, verbose_name="机号")
+    aircraft = models.ForeignKey(Aircraft, verbose_name="机号")
     item_code = models.CharField(max_length=32, verbose_name="件号")
     sort_code = models.CharField(max_length=32, verbose_name="序号")
     tear_data = models.DateTimeField(verbose_name="拆下日期")

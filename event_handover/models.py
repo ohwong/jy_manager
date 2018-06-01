@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+from aircraft.models import Aircraft
 
 
 class HandEvent(models.Model):
@@ -23,6 +24,7 @@ class HandEvent(models.Model):
     )
 
     aircraft_code = models.CharField(max_length=32, verbose_name="机号")
+    aircraft = models.ForeignKey(Aircraft)
     aircraft_type = models.IntegerField(verbose_name="机型", choices=AIRCRAFT_TYPE_CHOICES,
                                         default=1)
     subject = models.CharField(max_length=191, verbose_name="主题")

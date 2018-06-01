@@ -6,7 +6,7 @@ from django.forms import model_to_dict
 
 from django.http import HttpResponse
 from wsgiref.util import FileWrapper
-import weasyprint, pdfkit
+import weasyprint
 from io import BytesIO
 
 from .models import MCC, MccEquipment
@@ -36,7 +36,7 @@ class MCCAdmin(admin.ModelAdmin):
             'fields': ('order', 'aircraft_code', 'terminal', 'date', 'discrepancy_or_reason',
                        'work_content')
         }),
-        ('航材与工装设备信', {
+        ('计划工时', {
             'classes': ('suit-tab suit-tab-equipment',),
             'fields': ('plan_nam_hours', 'is_rll',
                        'is_run_test', 'reference', 'verifier'),
@@ -79,11 +79,9 @@ class MCCAdmin(admin.ModelAdmin):
 
         pdf = weasyprint.HTML(string=rendered_content).write_pdf()
 
-
         buffer = BytesIO(pdf)
         response = HttpResponse(FileWrapper(buffer), content_type='application/pdf')
         return response
-
 
     def get_urls(self):
         from django.conf.urls import url

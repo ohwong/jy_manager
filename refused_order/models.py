@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from aircraft.models import Aircraft
 
 
 class RefusedOrder(models.Model):
@@ -12,6 +13,7 @@ class RefusedOrder(models.Model):
     deal_user = models.ForeignKey(User, related_name='deal_user', verbose_name="处理人",
                                   blank=True, null=True)
     terminal = models.CharField(max_length=32, verbose_name="航站")
+    aircraft = models.ForeignKey(Aircraft, verbose_name="机号")
     aircraft_code = models.CharField(max_length=64, verbose_name="机号")
     worker_code = models.CharField(max_length=64, verbose_name="工卡号")
     worker_content = models.CharField(max_length=191, verbose_name="工作内容")

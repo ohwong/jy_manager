@@ -26,7 +26,7 @@ class Command(BaseCommand):
         return [DataStream, RefusedOrder, MCC, AirCraftCleanOut, Observation, HandEvent]
 
     def delete_repeat_code(self, aircraft):
-        objects = Aircraft.objects.filter(aircraft_code=aircraft.aircraft_code).excude(pk=aircraft.pk)
+        objects = Aircraft.objects.filter(aircraft_code=aircraft.aircraft_code).exclude(pk=aircraft.pk)
         for obj in objects:
             for model in self.models:
                 if model.objects.filter(aircraft=obj):
@@ -37,7 +37,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """"""
-        unique_code_list = [x[0] for x in Aircraft.objects.all().values_list("aircraft_code")]
+        unique_code_list = set([x[0] for x in Aircraft.objects.all().values_list("aircraft_code")])
         for code in unique_code_list:
             aircraft = Aircraft.objects.filter(aircraft_code=code).first()
             self.update_aircraft_code(code, aircraft)
+            self.delete_repeat_code(aircraft)

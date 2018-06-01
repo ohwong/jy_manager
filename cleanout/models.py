@@ -18,4 +18,4 @@ class AirCraftCleanOut(models.Model):
     note = models.TextField(blank=True, null=True, verbose_name="备注")
 
     def __str__(self):
-        return self.aircraft
+        return str(self.aircraft)

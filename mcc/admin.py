@@ -67,10 +67,10 @@ class MCCAdmin(admin.ModelAdmin):
         c['inspector'] = obj.inspector.username if obj.inspector else ''
         c['verifier'] = obj.verifier.username if obj.verifier else ''
         c['author'] = obj.author.username if obj.author else ''
+        c['aircraft_code'] = obj.aircraft.aircraft_code if obj.aircraft else ''
 
         equipments = MccEquipment.objects.filter(mcc=obj)
         c.update({"equipments": equipments})
-
         response = TemplateResponse(
             request, 'mcc/mcc.html', c
         )

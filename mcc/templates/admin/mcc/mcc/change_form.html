@@ -89,7 +89,7 @@
 
             <div class="box save-box">
                 {% if original.pk %}
-                <button class="btn btn-high"><a href="/jy/mcc/mcc/{{original.pk}}/pdf/">PDF预览</a></button>
+                <button class="btn btn-high" type="button"><a href="/jy/mcc/mcc/{{original.pk}}/pdf/">PDF预览</a></button>
                 {% endif%}
                 {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
             </div>

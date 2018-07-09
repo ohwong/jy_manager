@@ -34,7 +34,7 @@ class HandEventAdmin(AircraftFormChoicesAdmin, ImportExportModelAdmin):
     inlines = [HandEventCommentInline]
     resource_class = HandEventResource
 
-    change_readonly_fields = ["aircraft", "aircraft_type", "subject", "chapter_code",
+    change_readonly_fields = ["aircraft_type", "subject", "chapter_code",
                               "handover_type", "publish_user", "published_time"]
 
     list_filter = ["aircraft", "aircraft_type", "subject", "chapter_code",

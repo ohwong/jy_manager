@@ -8,6 +8,8 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from date_range_filter import DateRangeFilter
 
+from aircraft.admin import AircraftFormChoicesAdmin
+
 
 class HandEventResource(resources.ModelResource):
 
@@ -22,7 +24,7 @@ class HandEventCommentInline(admin.TabularInline):
     form = CommentChangeForm
 
 
-class HandEventAdmin(ImportExportModelAdmin):
+class HandEventAdmin(AircraftFormChoicesAdmin, ImportExportModelAdmin):
     list_display = ["aircraft", "aircraft_type", "subject", "chapter_code",
                     "handover_type", "publish_user", "recently_review",
                     "published_time", "status"]

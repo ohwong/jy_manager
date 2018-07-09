@@ -9,6 +9,8 @@ from import_export.admin import ImportExportModelAdmin
 from date_range_filter import DateRangeFilter
 from datastream.forms import SingleTextInputFilter
 
+from aircraft.admin import AircraftFormChoicesAdmin
+
 
 class KnobFilter(SingleTextInputFilter):
     title = '节'
@@ -34,7 +36,7 @@ class DataStreamResource(resources.ModelResource):
         model = DataStream
 
 
-class DataStreamAdmin(ImportExportModelAdmin):
+class DataStreamAdmin(AircraftFormChoicesAdmin, ImportExportModelAdmin):
     list_filter = ['the_year',  'the_month', 'the_day',  'aircraft', 'flight_type', 'location',
                    'weather', 'temperature',  'fault_type',
                    ChapterFilter, KnobFilter, 'is_sdr', "fault_result",

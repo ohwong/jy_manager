@@ -4,6 +4,7 @@ from .models import RefusedOrder
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from date_range_filter import DateRangeFilter
+from aircraft.admin import AircraftFormChoicesAdmin
 
 
 class RefusedOrderResource(resources.ModelResource):
@@ -12,7 +13,7 @@ class RefusedOrderResource(resources.ModelResource):
         model = RefusedOrder
 
 
-class RefusedOrderAdmin(ImportExportModelAdmin):
+class RefusedOrderAdmin(AircraftFormChoicesAdmin, ImportExportModelAdmin):
     list_display = ['created_at', 'aircraft',  'terminal', 'worker_code',
                     'worker_content', 'apply_user', "deal_user",  'note',
                     'has_applied']

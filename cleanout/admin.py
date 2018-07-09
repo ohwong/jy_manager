@@ -3,6 +3,7 @@ from .models import AirCraftCleanOut
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from date_range_filter import DateRangeFilter
+from aircraft.admin import AircraftFormChoicesAdmin
 
 
 class AirCraftCleanOutResource(resources.ModelResource):
@@ -11,7 +12,7 @@ class AirCraftCleanOutResource(resources.ModelResource):
         model = AirCraftCleanOut
 
 
-class AirCraftCleanOutAdmin(ImportExportModelAdmin):
+class AirCraftCleanOutAdmin(AircraftFormChoicesAdmin, ImportExportModelAdmin):
     list_display = ["aircraft", "aircraft_type", "cleanout_date", 'cleanout_method',
                     "cleanout_user", "cleanout_department", "cleanout_status",
                     "next_clieanout_date", "note"]

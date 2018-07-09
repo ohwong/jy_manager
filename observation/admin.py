@@ -2,10 +2,11 @@ from django.contrib import admin
 
 from .models import Observation
 from date_range_filter import DateRangeFilter
+from aircraft.admin import AircraftFormChoicesAdmin
 
 
 @admin.register(Observation)
-class ObservationAdmin(admin.ModelAdmin):
+class ObservationAdmin(AircraftFormChoicesAdmin, admin.ModelAdmin):
     list_display = ['name', 'aircraft', 'item_code', 'sort_code',
                     'tear_data', 'work_user', 'observation_days',
                     'estimated_closing_date', 'closed_date', 'closed_user']

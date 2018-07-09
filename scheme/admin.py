@@ -1,9 +1,10 @@
 from django.contrib import admin
 from .models import Mission, MissionType, ThisMonthMission, MyMonthMission, MissionImage
 from .utils import current_date_range
+from aircraft.admin import AircraftFormChoicesAdmin
 
 
-class MissionAdmin(admin.ModelAdmin):
+class MissionAdmin(AircraftFormChoicesAdmin, admin.ModelAdmin):
     list_display = ['title', 'mission_user', 'mission_type', 'start_date',
                     'end_date', 'status']
 

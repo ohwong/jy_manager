@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from wsgiref.util import FileWrapper
 import weasyprint
 from io import BytesIO
+from aircraft.admin import AircraftFormChoicesAdmin
 
 from .models import MCC, MccEquipment
 
@@ -19,7 +20,7 @@ class MccEquipmentAdmin(admin.TabularInline):
     max_num = 15
 
 
-class MCCAdmin(admin.ModelAdmin):
+class MCCAdmin(AircraftFormChoicesAdmin, admin.ModelAdmin):
 
     search_fields = []
 

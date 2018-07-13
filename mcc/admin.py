@@ -69,6 +69,7 @@ class MCCAdmin(AircraftFormChoicesAdmin, admin.ModelAdmin):
         c['verifier'] = obj.verifier.username if obj.verifier else ''
         c['author'] = obj.author.username if obj.author else ''
         c['aircraft_code'] = obj.aircraft.aircraft_code if obj.aircraft else ''
+        c['feed_back_date'] = obj.feed_back_date if obj.feed_back_date else ''
 
         equipments = MccEquipment.objects.filter(mcc=obj)
         c.update({"equipments": equipments})

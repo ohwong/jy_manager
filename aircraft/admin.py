@@ -6,7 +6,8 @@ from .models import Aircraft
 
 @admin.register(Aircraft)
 class AircraftAdmin(admin.ModelAdmin):
-    list_display = ('aircraft_code',)
+    list_display = ('aircraft_code', 'show_in_choice')
+    list_editable = ('show_in_choice', )
 
     def has_delete_permission(self, request, obj=None):
         return False

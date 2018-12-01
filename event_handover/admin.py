@@ -39,7 +39,7 @@ class HandEventAdmin(AircraftFormChoicesAdmin, ImportExportModelAdmin):
 
     list_filter = ["aircraft", "aircraft_type", "subject", "chapter_code",
                     "handover_type", "publish_user", ('published_time', DateRangeFilter), "status"]
-    search_fields = ["aircraft", "aircraft_type", "subject", "chapter_code",
+    search_fields = ["aircraft_type", "subject", "chapter_code",
                      "handover_type"]
 
     def get_readonly_fields(self, request, obj=None):
